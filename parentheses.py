@@ -34,7 +34,8 @@ def read_equation(equation):
         if par_val == True:
             print('parentesi corrette')
         else:
-            print('parentesi non corrette')
+            message = "Error"
+            return message
 
 
 
