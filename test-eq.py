@@ -82,8 +82,17 @@ def read_equation(equation):
             break
     return equation
 
-
-
+mode = utility.selection_mode(user_input)
+if mode == 'M-OP':
+    op.create_result(user_input)
+elif mode == 'M-PAR':
+    par.create_result(user_input)
+elif mode == "M-EQ":
+    print('Work in progress')
+    continue
+elif mode == "Error":
+    print('Work in progress')
+    continue
 
 def main():
     while True:

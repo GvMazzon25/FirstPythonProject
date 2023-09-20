@@ -1,9 +1,11 @@
 import validations as val
 import re
+import operation as op
 
+
+parenthesis = {')': '(', '}':'{', ']':'['}
 
 def create_array(equation):
-
     array = []
     regex = r'(\d+|[+\-*/()])'
     array = re.split(regex, equation)
@@ -11,25 +13,27 @@ def create_array(equation):
     print(array)
     return array
 
-def parentheses_gestor(equation):
-    return equation
+def parentheses_detector(array):
+    for element in array:
+        if element in '{[()]}':
+            print('true')
+            return True
+        else:
+            print('false')
+            return False
+
 
 
 def read_equation(equation):
-    par_list = {')': '(', '}':'{', ']':'['}
-    for i, element in equation:
-        if element in '{[(':
-            parenthesis = element[i]
-            while True:
-                if element == par_list[parenthesis]:
-                    return False
-
-
-
-
+    par_ceck = parentheses_detector(equation)
+    if par_ceck == False:
+        result = op.create_result(equation)
+    else:
+        return 'ciao'
 
 
 def create_result(input):
     result = []
-    result = create_array(input)
+    input_array = create_array(input)
+    result = read_equation(input_array)
     return result

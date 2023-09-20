@@ -2,10 +2,7 @@ import re
 import mathematics as mat
 import  validations as val
 
-def get_equation():
 
-    equation = input("Inserisci l'equazione: ")
-    return equation
 
 def operations(x, y, sign):
     if sign == "*":
@@ -18,14 +15,6 @@ def operations(x, y, sign):
         result = mat.sub_variables(x,y)
     return result
 
-
-def built_array_equation(equation):
-    array = []
-    regex = r'(\s+|[-+*/])'
-    array = re.split(regex,equation)
-    array = [item for item in array if item.strip()]
-    print(array)
-    return array
 
 def get_operator(element, equation, index):
     x = int(equation.pop(index - 1))
@@ -65,9 +54,7 @@ def read_equation(equation):
 
 
 def create_result(input):
-    array_equation = built_array_equation(input)
-    print(array_equation)
-    result = read_equation(array_equation)
+    result = read_equation(input)
     print(result)
     return result
 

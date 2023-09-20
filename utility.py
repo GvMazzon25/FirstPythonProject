@@ -1,5 +1,11 @@
 import re
 
+def get_equation():
+
+    equation = input("Inserisci l'equazione: ")
+    return equation
+
+
 def classifier_elements(input_str):
 
     results = {
