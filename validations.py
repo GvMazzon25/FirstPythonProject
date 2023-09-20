@@ -2,14 +2,14 @@ import re
 
 def parentheses_array_generator(equation):
     parArray = []
-    parStr =  re.findall(r'[(){}\[\]]', equation)
+    regex = r'[(){}\[\]]'
+    parStr =  re.findall(regex, equation)
     parArray.extend(list(parStr))
 
-    print(parArray)
     return parArray
 
 def parentheses_validation(equation):
-
+    print(equation)
     array = parentheses_array_generator(equation)
     stack = []
 
@@ -29,6 +29,4 @@ def parentheses_validation(equation):
                 else:
                     return False
     return len(stack) == 0
-
-
 

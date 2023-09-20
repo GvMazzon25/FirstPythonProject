@@ -5,6 +5,10 @@ def get_equation():
     equation = input("Inserisci l'equazione: ")
     return equation
 
+def extract_parentheses(equation):
+    parStr = re.findall(r'[(){}\[\]]', equation)
+    return parStr
+
 
 def classifier_elements(input_str):
 

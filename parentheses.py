@@ -29,7 +29,13 @@ def read_equation(equation):
     if par_ceck == False:
         result = op.create_result(equation)
     else:
-        return 'ciao'
+        str_eq = ''.join(equation)
+        par_val = val.parentheses_validation(str_eq)
+        if par_val == True:
+            print('parentesi corrette')
+        else:
+            print('parentesi non corrette')
+
 
 
 def create_result(input):
