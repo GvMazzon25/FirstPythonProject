@@ -5,21 +5,19 @@ import parentheses as par
 
 
 def main():
-    while True:
+    def main():
         user_input = utility.get_equation()
         result = par.create_result(user_input)
         if result == 'Errore':
-            response = input("Please enter a valid value  ")
+            print('Errore')
+            main()
         else:
             response = input("Do you want to continue?  Y/N  ")
-            print(response)
-            if response == "Y" or response == "y":
-              continue
-            if response == "N" or response == "n":
-              break
+            control = utility.control_response(response)
+            if control == True:
+                main()
             else:
-                response = input("Please enter a valid value  ")
-                continue
+                print('GoodBye')
 
 
 

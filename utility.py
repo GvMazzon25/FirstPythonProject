@@ -9,6 +9,15 @@ def extract_parentheses(equation):
     parStr = re.findall(r'[(){}\[\]]', equation)
     return parStr
 
+def control_response(response):
+    if response in 'Yy':
+        return True
+    elif response in 'Nn':
+        return False
+    else:
+        return False
+
+
 
 def classifier_elements(input_str):
 
