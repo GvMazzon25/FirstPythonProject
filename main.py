@@ -5,6 +5,7 @@ import parentheses as par
 
 
 def main():
+
     while True:
         user_input = op.get_equation()
         mode = utility.selection_mode(user_input)

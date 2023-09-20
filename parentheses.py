@@ -3,6 +3,7 @@ import re
 
 
 def create_array(equation):
+
     array = []
     regex = r'(\d+|[+\-*/()])'
     array = re.split(regex, equation)

@@ -3,6 +3,7 @@ import mathematics as mat
 import  validations as val
 
 def get_equation():
+
     equation = input("Inserisci l'equazione: ")
     return equation
 

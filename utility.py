@@ -1,6 +1,7 @@
 import re
 
 def classifier_elements(input_str):
+
     results = {
         'numbers': [],
         'parentheses': [],
