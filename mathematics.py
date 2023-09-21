@@ -1,3 +1,6 @@
+def exponentiation(x,y):
+    exp = x**y
+    return exp
 
 def sum_variables(x,y):
     sum = x + y
@@ -15,6 +18,3 @@ def diff_variables(x,y):
     diff = x / y
     return diff
 
-def exponentiation(x,y):
-    exp = x**y
-    return exp
