@@ -9,7 +9,6 @@ def parentheses_array_generator(equation):
     return parArray
 
 def parentheses_validation(equation):
-    print(equation)
     array = parentheses_array_generator(equation)
     stack = []
 

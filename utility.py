@@ -22,16 +22,13 @@ def create_array(equation):
     regex = r'(\d+|[+\-*/()])'
     array = re.split(regex, equation)
     array = [item for item in array if item.strip()]
-    print(array)
     return array
 
 def parentheses_detector(array):
     for element in array:
         if element in '{[()]}':
-            print('true')
             return True
         else:
-            print('false')
             return False
 
 def classifier_elements(input_str):
