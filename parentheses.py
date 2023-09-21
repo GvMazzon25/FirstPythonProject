@@ -23,6 +23,11 @@ def parentheses_detector(array):
             return False
 
 
+def do_equation(equation):
+    for element in equation:
+
+    return equation
+
 
 def read_equation(equation):
     par_ceck = parentheses_detector(equation)
@@ -32,7 +37,8 @@ def read_equation(equation):
         str_eq = ''.join(equation)
         par_val = val.parentheses_validation(str_eq)
         if par_val == True:
-            print('parentesi corrette')
+            result = do_equation(equation)
+            return result
         else:
             message = "Error"
             return message
