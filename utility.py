@@ -37,7 +37,8 @@ def classifier_elements(input_str):
         'numbers': [],
         'parentheses': [],
         'letters': [],
-        'signs': []
+        'signs': [],
+        'equals': []
     }
 
     # Regex per le diverse categorie
@@ -45,7 +46,8 @@ def classifier_elements(input_str):
         'numbers': r'\d+',
         'parentheses': r'[(){}\[\]]',
         'letters': r'[a-zA-Z]',
-        'signs': r'[+\-*/]'
+        'signs': r'[+\-*/]',
+        'equals': r'='
     }
 
     for category, regex_pattern in regex_patterns.items():
@@ -56,26 +58,18 @@ def classifier_elements(input_str):
     return results
 
 
-
-def selection_mode(input_str):
-    results = classifier_elements(input_str)
-    numbers = results['numbers']
-    parentheses = results['parentheses']
+def chose_mode(input):
+    results = classifier_elements(input)
     letters = results['letters']
-    signs = results['signs']
+    equal = results['equals']
+    if not letters and not equal:
+        #Codice per eseguire una equazione normale
+        return False
+    else:
+        #Codice per eseguire un'equazione con variabili
+        return True
 
-    if not numbers or not signs:
-        print('Error')
-        return 'Error'
-    elif not parentheses and not letters:
-        print('M-OP')
-        return 'M-OP'
-    elif letters and numbers and signs:
-        print('M-EQ')
-        return 'M-EQ'
-    elif parentheses and signs and numbers:
-        print('M-PAR')
-        return 'M-PAR'
+
 
 
 
