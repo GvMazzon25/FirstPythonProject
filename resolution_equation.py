@@ -6,19 +6,20 @@ def risolvi_equazione(espressione):
     # Funzione di supporto per valutare un'operazione tra due operandi e un operatore
     def calcola(operatore, operandi):
         if operatore == '+':
-            return math.sum_variables(operandi[0],operandi[1])
+            return math.sum_variables(operandi[0], operandi[1])
         elif operatore == '-':
-            return math.sub_variables(operandi[0],operandi[1])
+            return math.sub_variables(operandi[0], operandi[1])
         elif operatore == '*':
-            return math.mult_variables(operandi[0],operandi[1])
+            return math.mult_variables(operandi[0], operandi[1])
         elif operatore == '/':
-            return math.diff_variables(operandi[0],operandi[1])
+            return math.diff_variables(operandi[0], operandi[1])
         elif operatore == '^':
-            return math.exponentiation(operandi[0],operandi[1])
+            return math.exponentiation(operandi[0], operandi[1])
 
     # Inizializza uno stack per operandi e operatori
     operandi_stack = []
     operatori_stack = []
+    parentesi_stack = []  # Aggiunto uno stack per il controllo dell'ordine delle parentesi
 
     # Definisci la precedenza degli operatori
     precedenza = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
@@ -36,24 +37,33 @@ def risolvi_equazione(espressione):
             operandi_stack.append(float(token))
         elif token in parentesi_apertura:
             operatori_stack.append(token)
+            parentesi_stack.append(token)  # Aggiungi la parentesi aperta allo stack
         elif token in parentesi_chiusura:
-            parentesi_corrispondente = parentesi_apertura[parentesi_chiusura.index(token)]
-            while operatori_stack and operatori_stack[-1] != parentesi_corrispondente:
+            parentesi_aperta_corrispondente = parentesi_apertura[parentesi_chiusura.index(token)]
+            while operatori_stack and operatori_stack[-1] != parentesi_aperta_corrispondente:
                 operatore = operatori_stack.pop()
                 operandi2 = operandi_stack.pop()
                 operandi1 = operandi_stack.pop()
                 risultato_operazione = calcola(operatore, [operandi1, operandi2])
                 operandi_stack.append(risultato_operazione)
-            operatori_stack.pop()  # Rimuovi la parentesi aperta
+            operatori_stack.pop()  # Rimuovi la parentesi aperta corrispondente
+            parentesi_stack.pop()  # Rimuovi la parentesi aperta dallo stack
         elif token in "+-*/^":
-            while operatori_stack and operatori_stack[-1] in "+-*/^" and precedenza[token] <= precedenza[
-                operatori_stack[-1]]:
+            while (
+                operatori_stack
+                and operatori_stack[-1] in "+-*/^"
+                and precedenza[token] <= precedenza[operatori_stack[-1]]
+            ):
                 operatore = operatori_stack.pop()
                 operandi2 = operandi_stack.pop()
                 operandi1 = operandi_stack.pop()
                 risultato_operazione = calcola(operatore, [operandi1, operandi2])
                 operandi_stack.append(risultato_operazione)
             operatori_stack.append(token)
+
+    # Controlla se ci sono parentesi rimaste aperte
+    if parentesi_stack:
+        return 'Error: Le parentesi non sono bilanciate'
 
     # Esegui tutte le operazioni rimanenti
     while operatori_stack:

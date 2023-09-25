@@ -30,10 +30,6 @@ def parentheses_detector(array):
         else:
             return False
 
-
-
-
-
 def classifier_elements(input_str):
 
     results = {
