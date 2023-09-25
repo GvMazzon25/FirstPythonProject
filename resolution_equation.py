@@ -79,7 +79,9 @@ def risolvi_equazione(espressione):
 
 
 def create_result(espressione):
+    print(espressione)
     array_espression = utility.create_array(espressione)
+    print(array_espression)
     par_detector = utility.parentheses_detector(array_espression)
     if par_detector == False:
         result = risolvi_equazione(espressione)

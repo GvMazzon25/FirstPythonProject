@@ -9,21 +9,36 @@ def resolve_variable_equation(input):
             left_part = input[:counter]
             right_part = input[counter+1:]
             result_right = variable_transport(left_part,right_part)
-            print(result_right)
+            break
         else:
             counter +=1
 
-    return
+    return result_right
 
 
 def variable_transport(left_part, right_part):
     alfabeto = [chr(ord('a') + i) for i in range(26)] + [chr(ord('A') + i) for i in range(26)]
 
     for element in right_part:
-        if right_part in alfabeto:
+        if element in alfabeto:
             print("c'è una variabile")
+            break
         else:
-            result_right = reseq.risolvi_equazione(right_part)
+            for element in left_part:
+                for element in left_part:
+                    if isinstance(element, (int, float)):
+                        print('numeri a sinistra')
+                        break
+                    else:
+                        result_right = reseq.create_result(right_part)
+                        return result_right
+
+
+
+
+
+
+
 
 
 
