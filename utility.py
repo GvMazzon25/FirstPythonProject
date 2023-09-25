@@ -1,7 +1,6 @@
 import re
 
 def get_equation():
-
     equation = input("Inserisci l'equazione: ")
     return equation
 
@@ -30,6 +29,10 @@ def parentheses_detector(array):
             return True
         else:
             return False
+
+
+
+
 
 def classifier_elements(input_str):
 
