@@ -27,7 +27,7 @@ def variable_transport(left_part, right_part):
             for element in left_part:
                 for element in left_part:
                     if isinstance(element, (int, float)):
-                        print('numeri a sinistra')
+                        print('Numeri a sinistra')
                         break
                     else:
                         result_right = reseq.create_result(right_part)
