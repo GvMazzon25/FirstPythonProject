@@ -25,13 +25,15 @@ def variable_transport(left_part, right_part):
             break
         else:
             for element in left_part:
-                for element in left_part:
-                    if isinstance(element, (int, float)):
-                        print('Numeri a sinistra')
-                        break
-                    else:
-                        result_right = reseq.create_result(right_part)
-                        return result_right
+                if isinstance(element, (int, float)):
+                    print('Numeri a sinistra')
+                    break
+                else:
+                    result_right = reseq.create_result(right_part)
+                    result = left_part + '=' + str(result_right)
+                    return result
+
+
 
 
 
