@@ -1,4 +1,5 @@
 import resolution_equation as reseq
+import ClassVariable as variable
 
 def resolve_variable_equation(input):
     left_part = []
@@ -16,22 +17,42 @@ def resolve_variable_equation(input):
     return result_right
 
 
-def variable_transport(left_part, right_part):
+def search_variable(left_part, right_part):
+    left_variables_position = []
+    right_variables_position = []
+    left_index = 0
+    right_index = 0
     alfabeto = [chr(ord('a') + i) for i in range(26)] + [chr(ord('A') + i) for i in range(26)]
-
     for element in right_part:
         if element in alfabeto:
-            print("c'è una variabile")
-            break
+            right_variables_position.append(right_index)
+            right_index += 1
         else:
-            for element in left_part:
-                if isinstance(element, (int, float)):
-                    print('Numeri a sinistra')
-                    break
-                else:
-                    result_right = reseq.create_result(right_part)
-                    result = left_part + '=' + str(result_right)
-                    return result
+            right_index+=1
+
+    for element in left_part:
+        if element in alfabeto:
+            left_variables_position.append(left_index)
+            left_index += 1
+        else:
+            left_index+=1
+
+
+    return left_variables_position,right_variables_position
+
+
+
+
+
+
+def variable_transport(left_part, right_part):
+    left_index, right_index = search_variable(left_part, right_part)
+    if right_index == []:
+        result_right = reseq.create_result(right_part)
+
+
+    return result_right
+
 
 
 
