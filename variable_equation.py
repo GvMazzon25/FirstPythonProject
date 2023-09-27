@@ -10,12 +10,12 @@ def resolve_variable_equation(input):
         if element == '=':
             left_part = input[:counter]
             right_part = input[counter+1:]
-            result_right = variable_operation(left_part,right_part)
+            result = variable_operation(left_part,right_part)
             break
         else:
             counter +=1
 
-    return result_right
+    return result
 
 
 def search_variable(left_part, right_part):
@@ -45,18 +45,16 @@ def generate_variable(index, expression):
     variable_base = expression[index]
     variable_sign = '+'
     variable_number = '1'
-    elements = []
     list_num = []
-    elements = re.split(r'[-+*/]|\w+', expression)
     if index == 0:
         variable = Variable.Variable(variable_sign, variable_number, variable_base)
     else:
         for i in range(index, - 1, -1):
-            if elements[i] in ['+', '-', '*', '/']:
-                variable_sign = elements[i]
+            if expression[i] in ['+', '-', '*', '/']:
+                variable_sign = expression[i]
                 break
-            elif elements[i].isdigit():
-                list_num.insert(0, elements[i])
+            elif expression[i].isdigit():
+                list_num.insert(0, expression[i])
 
         variable_number = str(list_num)
         variable = Variable.Variable(variable_sign, variable_number, variable_base)
@@ -69,17 +67,13 @@ def generate_variable(index, expression):
 
 
 
-
-
-
-
 def create_variable_arr(indexes, expression):
     variable_arr = []
     for i in indexes:
         variable = generate_variable(i,expression)
-        variable_arr.append(variable)
-        print(variable_arr)
+        variable_arr.append(variable.sign + variable.mult + variable.variable)
 
+    print(variable_arr)
     return variable_arr
 
 
