@@ -1,5 +1,6 @@
 import resolution_equation as reseq
-import ClassVariable as variable
+import ClassVariable as Variable
+import re
 
 def resolve_variable_equation(input):
     left_part = []
@@ -9,7 +10,7 @@ def resolve_variable_equation(input):
         if element == '=':
             left_part = input[:counter]
             right_part = input[counter+1:]
-            result_right = variable_transport(left_part,right_part)
+            result_right = variable_operation(left_part,right_part)
             break
         else:
             counter +=1
@@ -40,18 +41,70 @@ def search_variable(left_part, right_part):
 
     return left_variables_position,right_variables_position
 
+def generate_variable(index, expression):
+    variable_base = expression[index]
+    variable_sign = '+'
+    variable_number = '1'
+    elements = []
+    list_num = []
+    elements = re.split(r'[-+*/]|\w+', expression)
+    if index == 0:
+        variable = Variable.Variable(variable_sign, variable_number, variable_base)
+    else:
+        for i in range(index, - 1, -1):
+            if elements[i] in ['+', '-', '*', '/']:
+                variable_sign = elements[i]
+                break
+            elif elements[i].isdigit():
+                list_num.insert(0, elements[i])
+
+        variable_number = str(list_num)
+        variable = Variable.Variable(variable_sign, variable_number, variable_base)
+
+    return variable
 
 
 
 
 
-def variable_transport(left_part, right_part):
+
+
+
+
+
+
+def create_variable_arr(indexes, expression):
+    variable_arr = []
+    for i in indexes:
+        variable = generate_variable(i,expression)
+        variable_arr.append(variable)
+        print(variable_arr)
+
+    return variable_arr
+
+
+
+
+def variable_transport(left_part, right_part, left_index, right_index):
+    variable_left = create_variable_arr(left_index, left_part)
+    variable_right = create_variable_arr(right_index,right_part)
+    return variable_left, variable_right
+
+
+
+
+
+
+def  variable_operation(left_part, right_part):
     left_index, right_index = search_variable(left_part, right_part)
     if right_index == []:
         result_right = reseq.create_result(right_part)
+        result = str(left_part) + ' = ' + str(result_right)
+    else:
+        result = variable_transport(left_part, right_part, left_index, right_index);
 
 
-    return result_right
+    return result
 
 
 
