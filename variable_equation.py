@@ -52,13 +52,18 @@ def generate_variable(index, expression):
         for i in range(index, - 1, -1):
             if expression[i] in ['+', '-', '*', '/']:
                 variable_sign = expression[i]
+                if expression[i+1] == variable_base:
+                    variable_number = '1'
+                    variable = Variable.Variable(variable_sign, variable_number, variable_base)
+                    return variable
                 break
             elif expression[i].isdigit():
+                print(expression[i])
                 list_num.insert(0, expression[i])
 
-        variable_number = str(list_num)
-        variable = Variable.Variable(variable_sign, variable_number, variable_base)
+        variable_number = "".join(list_num)
 
+    variable = Variable.Variable(variable_sign, variable_number, variable_base)
     return variable
 
 
