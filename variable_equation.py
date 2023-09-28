@@ -85,10 +85,38 @@ def variable_transport(left_part, right_part, left_index, right_index):
             variable2 = Variable.Variable('*', variable.mult, variable.variable)
             right_arr.append(variable2)
             variable_left.append(variable2)
-
-
-
+    print(do_operation(variable_left))
+    print(do_operation(right_arr))
     return variable_left, right_arr
+
+
+def do_operation(array):
+    first_var = array[0]
+    second_var = array[1]
+    print(array[1].sign)
+    if second_var is not []:
+        sign1 = first_var.sign
+        sign2 = second_var.sign
+        if sign1 == '+' and sign2 == '-':
+            array[1].sign = '+'
+        elif sign1 == '-' and sign2 == '+':
+            array[1].sign = '-'
+        elif sign1 == '-' and sign2 == '-':
+            array[1].sign = '+'
+
+    operation = ''
+
+    for indice, variable in enumerate(array):
+        if indice == 0:
+            number = variable.mult
+            operation = operation + str(number)
+        else:
+            sign = variable.sign
+            number = variable.mult
+            operation = operation + sign + str(number)
+
+    print(operation)
+    return operation
 
 
 def variable_operation(left_part, right_part):
@@ -98,7 +126,6 @@ def variable_operation(left_part, right_part):
         result = str(left_part) + ' = ' + str(result_right)
     else:
         result = variable_transport(left_part, right_part, left_index, right_index);
-
     return result
 
 
