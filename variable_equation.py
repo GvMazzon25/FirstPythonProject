@@ -54,7 +54,7 @@ def create_variable_arr(indexes, expression):
     variable_arr = []
     for i in indexes:
         variable = generate_variable(i, expression)
-        variable_arr.append(variable.sign + variable.mult + variable.variable)
+        variable_arr.append(variable)
 
     print(variable_arr)
     return variable_arr
@@ -63,7 +63,32 @@ def create_variable_arr(indexes, expression):
 def variable_transport(left_part, right_part, left_index, right_index):
     variable_left = create_variable_arr(left_index, left_part)
     variable_right = create_variable_arr(right_index, right_part)
-    return variable_left, variable_right
+    left_arr = []
+    right_arr = []
+    for element in variable_right:
+        variable = element
+        right_arr.append(variable)
+        sign = variable.sign
+        if sign == '+':
+            variable2 = Variable.Variable('-', variable.mult, variable.variable)
+            right_arr.append(variable2)
+            variable_left.append(variable2)
+        elif sign == '-':
+            variable2 = Variable.Variable('+', variable.mult, variable.variable)
+            right_arr.append(variable2)
+            variable_left.append(variable2)
+        elif sign == '*':
+            variable2 = Variable.Variable('/', variable.mult, variable.variable)
+            right_arr.append(variable2)
+            variable_left.append(variable2)
+        elif sign == '/':
+            variable2 = Variable.Variable('*', variable.mult, variable.variable)
+            right_arr.append(variable2)
+            variable_left.append(variable2)
+
+
+
+    return variable_left, right_arr
 
 
 def variable_operation(left_part, right_part):
