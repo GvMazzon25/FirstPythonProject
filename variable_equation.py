@@ -2,21 +2,6 @@ import resolution_equation as reseq
 import ClassVariable as Variable
 import re
 
-def resolve_variable_equation(input):
-    left_part = []
-    right_part = []
-    counter = 0
-    for element in input:
-        if element == '=':
-            left_part = input[:counter]
-            right_part = input[counter+1:]
-            result = variable_operation(left_part,right_part)
-            break
-        else:
-            counter +=1
-
-    return result
-
 
 def search_variable(left_part, right_part):
     left_variables_position = []
@@ -29,17 +14,15 @@ def search_variable(left_part, right_part):
             right_variables_position.append(right_index)
             right_index += 1
         else:
-            right_index+=1
-
+            right_index += 1
     for element in left_part:
         if element in alfabeto:
             left_variables_position.append(left_index)
             left_index += 1
         else:
-            left_index+=1
+            left_index += 1
+    return left_variables_position, right_variables_position
 
-
-    return left_variables_position,right_variables_position
 
 def generate_variable(index, expression):
     variable_base = expression[index]
@@ -52,7 +35,7 @@ def generate_variable(index, expression):
         for i in range(index, - 1, -1):
             if expression[i] in ['+', '-', '*', '/']:
                 variable_sign = expression[i]
-                if expression[i+1] == variable_base:
+                if expression[i + 1] == variable_base:
                     variable_number = '1'
                     variable = Variable.Variable(variable_sign, variable_number, variable_base)
                     return variable
@@ -67,53 +50,45 @@ def generate_variable(index, expression):
     return variable
 
 
-
-
-
-
-
 def create_variable_arr(indexes, expression):
     variable_arr = []
     for i in indexes:
-        variable = generate_variable(i,expression)
+        variable = generate_variable(i, expression)
         variable_arr.append(variable.sign + variable.mult + variable.variable)
 
     print(variable_arr)
     return variable_arr
 
 
-
-
 def variable_transport(left_part, right_part, left_index, right_index):
     variable_left = create_variable_arr(left_index, left_part)
-    variable_right = create_variable_arr(right_index,right_part)
+    variable_right = create_variable_arr(right_index, right_part)
     return variable_left, variable_right
 
 
-
-
-
-
-def  variable_operation(left_part, right_part):
+def variable_operation(left_part, right_part):
     left_index, right_index = search_variable(left_part, right_part)
-    if right_index == []:
+    if not right_index:
         result_right = reseq.create_result(right_part)
         result = str(left_part) + ' = ' + str(result_right)
     else:
         result = variable_transport(left_part, right_part, left_index, right_index);
 
-
     return result
 
 
+def resolve_variable_equation(user_input):
+    result = []
+    left_part = []
+    right_part = []
+    counter = 0
+    for element in user_input:
+        if element == '=':
+            left_part = user_input[:counter]
+            right_part = user_input[counter + 1:]
+            result = variable_operation(left_part, right_part)
+            break
+        else:
+            counter += 1
 
-
-
-
-
-
-
-
-
-
-
+    return result
