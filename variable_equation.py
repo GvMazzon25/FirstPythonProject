@@ -88,6 +88,43 @@ def variable_transport(left_part, right_part, left_index, right_index):
     return left, right
 
 
+def search_number(left_part, right_part):
+    left_indices = []
+    right_indices = []
+    left_index = 0
+    right_index = 0
+
+    for element in right_part:
+        if element.isdigit():
+            if (right_index == 0 or not right_part[right_index - 1].isalpha()) and \
+                    (right_index == len(right_part) - 1 or not right_part[right_index + 1].isalpha()):
+                right_indices.append(right_index)
+            right_index += 1
+        else:
+            right_index += 1
+
+    for element in left_part:
+        if element.isdigit():
+            if (left_index == 0 or not left_part[left_index - 1].isalpha()) and \
+                    (left_index == len(left_part) - 1 or not left_part[left_index + 1].isalpha()):
+                left_indices.append(left_index)
+            left_index += 1
+        else:
+            left_index += 1
+
+    return left_indices, right_indices
+
+def create_number_array(indexes, array):
+    number_array = []
+    return number_array
+
+def number_transport(left_part, right_part, left_index, right_index):
+    number_left = ''
+    number_right = ''
+    result = ''
+    return result
+
+
 def do_operation(array):
     first_var = array[0]
     second_var = array[1]
@@ -121,7 +158,8 @@ def variable_operation(left_part, right_part):
         result_right = reseq.create_result(right_part)
         result = str(left_part) + ' = ' + str(result_right)
     else:
-        result = variable_transport(left_part, right_part, left_index, right_index);
+        left, right = variable_transport(left_part, right_part, left_index, right_index);
+        result = str(left) + '=' + str(right)
     return result
 
 
