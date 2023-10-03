@@ -127,19 +127,28 @@ def generate_number(index, expression):
 
 def create_number_array(indexes, array):
     number_array = []
+    num = ''
+    single_number = ''
     for i in indexes:
-        number = generate_number(i, array)
-        number_array.append(number)
+        if isinstance(i, int):
+            print(i)
+
+
+    #for i in indexes:
+        #number = generate_number(i, array)
+        #number_array.append(number)
     return number_array
 
 def number_transport(left_part, right_part, left_index, right_index):
-    number_left = create_number_array(left_part,left_index)
+    print(left_index)
+    number_left = create_number_array(left_index,left_part)
     number_right = create_number_array(right_part,right_index)
+    print(number_left,number_right)
     result = ''
     for element in left_part:
         number = element
 
-    return result
+    return number_left
 
 
 def do_operation(array):
@@ -171,12 +180,14 @@ def do_operation(array):
 
 def variable_operation(left_part, right_part):
     left_index, right_index = search_variable(left_part, right_part)
-    print(search_number(left_part, right_part))
+    left_n_index, right_n_index = search_number(left_part, right_part)
+    print(left_n_index, 'ciao')
     if not right_index:
         result_right = reseq.create_result(right_part)
         result = str(left_part) + ' = ' + str(result_right)
     else:
-        left, right = variable_transport(left_part, right_part, left_index, right_index);
+        left, right = variable_transport(left_part, right_part, left_index, right_index)
+        n_left = number_transport(left_part,right_part,left_n_index,right_n_index)
         result = str(left) + '=' + str(right)
     return result
 
