@@ -1,5 +1,6 @@
 import resolution_equation as reseq
 import ClassVariable as Variable
+import NumberClass as Number
 import re
 
 
@@ -111,17 +112,33 @@ def search_number(left_part, right_part):
             left_index += 1
         else:
             left_index += 1
-
+    print(left_indices, right_indices)
     return left_indices, right_indices
+
+
+def generate_number(index, expression):
+    number_base = expression[index]
+    number_sign = '+'
+    number = []
+
+
+    return number
+
 
 def create_number_array(indexes, array):
     number_array = []
+    for i in indexes:
+        number = generate_number(i, array)
+        number_array.append(number)
     return number_array
 
 def number_transport(left_part, right_part, left_index, right_index):
-    number_left = ''
-    number_right = ''
+    number_left = create_number_array(left_part,left_index)
+    number_right = create_number_array(right_part,right_index)
     result = ''
+    for element in left_part:
+        number = element
+
     return result
 
 
@@ -154,6 +171,7 @@ def do_operation(array):
 
 def variable_operation(left_part, right_part):
     left_index, right_index = search_variable(left_part, right_part)
+    print(search_number(left_part, right_part))
     if not right_index:
         result_right = reseq.create_result(right_part)
         result = str(left_part) + ' = ' + str(result_right)
@@ -172,8 +190,7 @@ def resolve_variable_equation(user_input):
         if element == '=':
             left_part = user_input[:counter]
             right_part = user_input[counter + 1:]
-            left, right = variable_operation(left_part, right_part)
-            result = str(left) + '=' + str(right)
+            result = variable_operation(left_part,right_part)
             break
         else:
             counter += 1
